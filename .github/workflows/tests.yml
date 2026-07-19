@@ -1,0 +1,21 @@
+name: Run Pytest
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Репозиторийді жүктеу
+        uses: actions/checkout@v4
+
+      - name: Python орнату
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Тәуелділіктерді орнату
+        run: pip install -r requirements.txt
+
+      - name: Pytest тесты
+        run: pytest -v
