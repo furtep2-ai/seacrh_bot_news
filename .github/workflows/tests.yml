@@ -19,3 +19,5 @@ jobs:
 
       - name: Pytest тесты
         run: pytest -v
+        env:
+          DATABASE_URL: "mysql+aiomysql://root:Gersolo2009.@localhost:3306/ai_news_bot"
