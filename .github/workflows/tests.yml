@@ -5,19 +5,25 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: Gersolo2009.
+          MYSQL_DATABASE: ai_news_bot
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
     steps:
-      - name: Установка репозитария
-        uses: actions/checkout@v4
-
-      - name: Установка пайтон
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-
-      - name: Установка библиотек
-        run: pip install -r requirements.txt
-
-      - name: Pytest тесты
-        run: pytest -v
+      - run: pip install -r requirements.txt
+      - run: pytest -v
         env:
-          DATABASE_URL: "sqlite+aiosqlite:///:memory:"
+          DATABASE_URL: "mysql+aiomysql://root:Gersolo2009.@127.0.0.1:3306/ai_news_bot"
