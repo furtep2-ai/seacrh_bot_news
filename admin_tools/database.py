@@ -8,6 +8,8 @@ import aiomysql
 load_dotenv()
 
 database_url = os.getenv("database_url")
+if not database_url:
+    database_url = "sqlite+aiosqlite:///:memory:"
 
 engine = create_async_engine(database_url)
 
