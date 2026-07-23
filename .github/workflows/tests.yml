@@ -28,5 +28,5 @@ jobs:
         run: sleep 20
       - run: pytest -v
         env:
-          DATABASE_URL: "mysql+aiomysql://root:Gersolo2009.@127.0.0.1:3306/ai_news_bot"
+          database_url: "mysql+aiomysql://root:Gersolo2009.@127.0.0.1:3306/ai_news_bot"
 
